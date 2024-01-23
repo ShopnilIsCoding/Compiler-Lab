@@ -3,7 +3,7 @@ using namespace std;
 
 string Q0(string a)
 {
-        if(a[0]=='_' || (a[0]>=65&&a[0]<=90)||(a[0]>=97 && a[0]<=122))
+        if(a[0]=='_' || (a[0]>=65&&a[0]<=90)||(a[0]>=97 && a[0]<=122)) 
             return "Final";
         else
             return "Trap";
