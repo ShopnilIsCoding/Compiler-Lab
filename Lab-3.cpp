@@ -90,7 +90,7 @@ bool isValidString(const string &str)
         }
     }
 
-    return currentState == 8;
+    return currentState == 8 || currentState==6;
 }
 
 int main()
