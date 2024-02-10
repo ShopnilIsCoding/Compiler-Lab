@@ -20,7 +20,7 @@ bool isSymbol(string word)
                                 word[0] == ';' || word[0] == ',' || word[0] == '.' || word[0] == ':' || word[0] == '"' || word[0] == '\'');
 }
 
-bool isCodeOperator(string word)
+bool isOperator(string word)
 {
     return word[0] == '=' || word[0] == '+' || word[0] == '-' || word[0] == '*' || word[0] == '/' ||
            word[0] == '%' || word[0] == '<' || word[0] == '>' || word[0] == '!' || word[0] == '&' ||
@@ -35,7 +35,7 @@ bool isKeyword(string word)
            word == "while" || word == "cout" || word == "cin" || word == "endl";
 }
 
-void analyzeCode(string code,
+void Tokenizer(string code,
                  vector<string> &keywords,
                  vector<string> &identifiers,
                  vector<string> &symbols,
@@ -43,10 +43,10 @@ void analyzeCode(string code,
 {
     stringstream ss(code);
     string word;
-    set<string> uniqueWords;
+    set<string> matching;
     while (ss >> word)
     {
-        if (uniqueWords.insert(word).second)
+        if (matching.insert(word).second)
         {
             if (isKeyword(word))
             {
@@ -60,7 +60,7 @@ void analyzeCode(string code,
             {
                 symbols.push_back(word);
             }
-            else if (isCodeOperator(word))
+            else if (isOperator(word))
             {
                 operators.push_back(word);
             }
@@ -75,7 +75,7 @@ int main()
     cout << "Enter code : ";
     getline(cin, code);
     vector<string> keywords, identifiers, symbols, operators;
-    analyzeCode(code, keywords, identifiers, symbols, operators);
+    Tokenizer(code, keywords, identifiers, symbols, operators);
 
     cout << "Keywords: ";
     for (string word : keywords)
@@ -112,13 +112,13 @@ int main()
 
 // example input
 
-// int main ( )
-// {
-// int x = 10 ;
-// int y = 20 ;
-// cout << "Sum: " << ( x + y ) << endl ;
-// return 0 ;
-// }
+//  int main ( )
+//  {
+//  int x = 10 ;
+//  int y = 20 ;
+//  cout << "Sum: " << ( x + y ) << endl ;
+//  return 0 ;
+//  }
 
 // example output
 
