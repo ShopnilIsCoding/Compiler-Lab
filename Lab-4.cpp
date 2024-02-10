@@ -7,14 +7,10 @@
 using namespace std;
 
 bool isIdentifier(string word) {
-    for (char c : word) {
-        if (!((c >= 'a' && c <= 'z') ||
-              (c >= 'A' && c <= 'Z') ||
-              c == '_')) {
-            return false;
-        }
-    }
-    return true;
+     
+         return (word[0] >= 'a' && word[0] <= 'z') ||
+              (word[0] >= 'A' && word[0] <= 'Z') ||
+              word[0] == '_';
 }
 
 bool isSymbol(string word) {
@@ -23,16 +19,16 @@ bool isSymbol(string word) {
 }
 
 bool isCodeOperator(string word) {
-    return word.size() == 1 && (word[0] == '=' || word[0] == '+' || word[0] == '-' || word[0] == '*' || word[0] == '/' ||
+    return word[0] == '=' || word[0] == '+' || word[0] == '-' || word[0] == '*' || word[0] == '/' ||
            word[0] == '%' || word[0] == '<' || word[0] == '>' || word[0] == '!' || word[0] == '&' ||
-           word[0] == '|' || word[0] == '^' || word[0] == '~' || word[0] == '?' || word[0] == ':');
+           word[0] == '|' || word[0] == '^' || word[0] == '~' || word[0] == '?' || word[0] == ':' ||word == "<<";
 }
 
 bool isKeyword(string word) {
     return word == "break" || word == "char" || word == "continue" || word == "do" ||
            word == "double" || word == "else" || word == "float" || word == "for" ||
            word == "if" || word == "int" || word == "long" || word == "return" ||
-           word == "while" || word == "cout" || word == "cin";
+           word == "while" || word == "cout" || word == "cin" || word == "endl";
 }
 
 void analyzeCode(string code,
@@ -60,7 +56,8 @@ void analyzeCode(string code,
 
 int main() {
     string code;
-    cout << "Enter code: ";
+    cout << "Enter code In a single line and provide space after each Token -->> "<<endl;
+    cout << "Enter code : ";
     getline(cin, code);
     vector<string> keywords, identifiers, symbols, operators;
     analyzeCode(code, keywords, identifiers, symbols, operators);
@@ -91,3 +88,22 @@ int main() {
 
     return 0;
 }
+
+// Enter code In a single line and provide space after each Token -->>  
+
+// example input 
+
+// int main ( ) 
+// { 
+// int x = 10 ;    
+// int y = 20 ;    
+// cout << "Sum: " << ( x + y ) << endl ;    
+// return 0 ; 
+// }
+
+//example output
+
+// Keywords: int cout endl return
+// Identifiers: main x y       
+// Symbols: ( ) { ; " }   
+// Operators: = << +
