@@ -35,12 +35,13 @@ bool isKeyword(string word)
            word == "while" || word == "cout" || word == "cin" || word == "endl";
 }
 
-void Tokenizer(string code,
+int Tokenizer(string code,
                  vector<string> &keywords,
                  vector<string> &identifiers,
                  vector<string> &symbols,
                  vector<string> &operators)
 {
+    int token=0;
     stringstream ss(code);
     string word;
     set<string> matching;
@@ -51,21 +52,27 @@ void Tokenizer(string code,
             if (isKeyword(word))
             {
                 keywords.push_back(word);
+                token++;
             }
             else if (isIdentifier(word))
             {
                 identifiers.push_back(word);
+                token++;
             }
             else if (isSymbol(word))
             {
                 symbols.push_back(word);
+                token++;
             }
             else if (isOperator(word))
             {
                 operators.push_back(word);
+                token++;
             }
+
         }
     }
+    return token;
 }
 
 int main()
@@ -104,6 +111,8 @@ int main()
         cout << word << " ";
     }
     cout << endl;
+
+    cout<<"Token Count : "<<Tokenizer(code, keywords, identifiers, symbols, operators);
 
     return 0;
 }
