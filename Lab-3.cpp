@@ -13,7 +13,7 @@ bool isSign(char c)
     return c == '^';
 }
 
-bool isValidString(const string &str)
+bool isValidString(string str)
 {
     int currentState = 0;
 
@@ -22,7 +22,7 @@ bool isValidString(const string &str)
         switch (currentState)
         {
         case 0:
-            if (c >= '1' && c <= '9')
+            if (isDigit(c))
                 currentState = 1;
             else if (c == '.')
                 currentState = 2;
