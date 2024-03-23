@@ -1,0 +1,2 @@
+
+bool isOperator(string word)
